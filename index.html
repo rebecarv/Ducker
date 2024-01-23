@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ducker</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@700&family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <!-- Container element for the game board -->
+    <div class="game-container">
+      <!-- Game title and timer -->
+      <header class="game-panel">
+        <h1>Ducker</h1>
+        <div class="score">
+          <span>TIME</span>
+          <span class="timer">00015</span>
+        </div>
+      </header>
+
+      <main class="game-board">
+        <!-- Game grid -->
+        <div class="grid"></div>
+
+        <!-- Game over -->
+        <div class="end-game-screen hidden">
+          <h2 class="end-game-text">Game<br />Over</h2>
+          <button class="btn play-again">Play Again</button>
+        </div>
+      </main>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="./script.js"></script>
+  </body>
+</html>

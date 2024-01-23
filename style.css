@@ -1,0 +1,212 @@
+/*
+  black: rgb(0, 23, 50); #001732;
+  orange: rgb(241, 117, 78); #f1754e;
+  lightgreen: rgba(78, 241, 187, 0.7); #4ef1bbb3;
+  bg-color: rgb(216, 238, 232);  #d8eee8;
+  bg-dark-color: rgb(203, 224, 221); #cbe0dd;
+  clicked-cell: rgb(157, 197, 199); #9dc5c7;
+  transparent red: rgba(241, 117, 78, 0.7); #f1754eb3;
+
+
+	font-family: 'Darker Grotesque', sans-serif;
+	font-family: 'Press Start 2P', cursive;
+*/
+
+/* # Generic */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 16px;
+  font-family: 'Darker Grotesque', sans-serif;
+  line-height: 1;
+  color: rgb(0, 23, 50);
+  background-color: rgb(216, 238, 232);
+}
+
+.game-container {
+  width: calc((48px * 9) + 4px);
+}
+
+/* # Game Panel */
+
+h1 {
+  font-size: 40px;
+}
+
+.score {
+  display: flex;
+  justify-content: space-between;
+  font-size: 32px;
+}
+
+/* # Game grid */
+
+.game-board {
+  border: 2px solid rgb(0, 23, 50);
+  position: relative;
+}
+
+.grid {
+  width: calc(48px * 9); /* 👈 change multiplier based on grid row count */
+  height: calc(48px * 9); /*👈 change multiplier based on game column count */
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cell {
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  outline: 1px dashed grey;
+  background-position: center;
+  background-size: contain;
+}
+
+.cell-dark {
+  background-color: rgb(203, 224, 221);
+}
+
+.river {
+  outline: none;
+  background-color: lightblue;
+}
+
+.road {
+  outline: none;
+  border-top: 1px dashed white;
+  border-bottom: 1px dashed white;
+  background-color: gray;
+}
+
+.car {
+  background-image: url('./images/car.png');
+}
+
+.bus {
+  background-image: url('./images/bus.png');
+}
+
+.wood {
+  background-image: url('./images/wood.png');
+}
+
+/* 
+This will work in a normal IDE / code editor but StackBlitz does not support GIF filetypes.
+See the 2 styles below for an alternative approach using animations.
+
+.duck {
+	background-image: url('./images/duck-walk.gif');
+}
+
+.river.duck {
+	background-image: url('./images/duck-walk.gif'), url('images/wood.png');
+}
+*/
+
+/* Alternative approach to animate the duck - for StackBlitz only */
+.duck {
+  animation: changeDuckImage 0.6s step-start infinite;
+}
+@keyframes changeDuckImage {
+  0% {
+    background-image: url('./images/duck-walk/duck-walk-1.png');
+  }
+  25% {
+    background-image: url('./images/duck-walk/duck-walk-2.png');
+  }
+  75% {
+    background-image: url('./images/duck-walk/duck-walk-3.png');
+  }
+  100% {
+    background-image: url('./images/duck-walk/duck-walk-4.png');
+  }
+}
+
+/* Alternative approach to animate the duck when on the river - for StackBlitz only */
+.river.duck {
+  animation: changeRiverDuckImage 0.6s step-start infinite;
+}
+@keyframes changeRiverDuckImage {
+  0% {
+    background-image: url('./images/duck-walk/duck-walk-1.png'),
+      url('./images/wood.png');
+  }
+  25% {
+    background-image: url('./images/duck-walk/duck-walk-2.png'),
+      url('./images/wood.png');
+  }
+  75% {
+    background-image: url('./images/duck-walk/duck-walk-3.png'),
+      url('./images/wood.png');
+  }
+  100% {
+    background-image: url('./images/duck-walk/duck-walk-4.png'),
+      url('./images/wood.png');
+  }
+}
+
+.time-up,
+.duck-arrived {
+  background-image: url('./images/duck-standing.png');
+}
+
+.duck-hit {
+  background-image: url('./images/duck-hit.png');
+}
+
+.duck-drowned {
+  background-image: url('./images/duck-drowned.png');
+}
+
+/* # Game over */
+
+.end-game-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f1754eb3;
+
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 16px;
+}
+
+.win {
+  background-color: rgba(78, 241, 187, 0.7);
+}
+
+.end-game-text {
+  font-size: 48px;
+  font-family: 'Press Start 2P', cursive;
+  text-transform: uppercase;
+}
+
+.btn {
+  font-size: 24px;
+  font-family: 'Darker Grotesque', sans-serif;
+  padding: 4px 20px 8px 20px;
+  /* width: 50%; */
+  cursor: pointer;
+  text-transform: uppercase;
+  border: 2px solid rgb(0, 23, 50);
+}
+
+.btn:hover {
+  background-color: rgb(203, 224, 221);
+}
+
+/* # Utilities */
+
+.hidden {
+  display: none;
+}
