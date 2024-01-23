@@ -26,6 +26,11 @@ body {
   line-height: 1;
   color: rgb(0, 23, 50);
   background-color: rgb(216, 238, 232);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
 }
 
 .game-container {
@@ -36,6 +41,7 @@ body {
 
 h1 {
   font-size: 40px;
+  text-align: center;
 }
 
 .score {

@@ -107,16 +107,15 @@ function moveDuck(event) {
 
 //Animation Functions
 function moveRight(gridRowIndex) {
-    const currentRow = grindMatrix[gridRowIndex];
-
-    const lastElement = rowCells.pop();
+    const currentRow = gridMatrix[gridRowIndex];
+    const lastElement = currentRow.pop();
     currentRow.unshift(lastElement);
 }
 
 function moveLeft(gridRowIndex) {
     const currentRow = gridMatrix[gridRowIndex];
     const firstELement = currentRow.shift();
-    currentRow.push(firstElement);
+    currentRow.push(firstELement);
 }
 
 
@@ -131,8 +130,31 @@ function animateGame() {
     moveRight(6);
 }
 
+function updateDuckPosition () {
+    gridMatrix[duckPosition.y][duckPosition.x] = contentBeforeDuck;
+
+    if(contentBeforeDuck === 'wood') {
+      if(duckPosition.y === 1 && duckPosition.x < 8) duckPosition.x++;
+      else if(duckPosition.y === 2 && duckPosition.x > 0) duckPosition.x--;
+    }
+}
+
+function checkPosition() {
+    if(duckPosition.y === victoryRow) endGame('duck-arrived');
+    else if (contentBeforeDuck === 'river') endGame('duck-drowned');
+    else if (contentBeforeDuck === 'car' || contentBeforeDuck === 'bus') endGame('duck-hit');
+}
+
 //Game Win/Loss Logic
-function endGame() {
+function endGame(reason) {
+// Victory
+if (reason === 'duck-arrived') {
+    endGameText.innerHTML = 'YOU<br>WIN!';
+    endGameScreen.classList.add('win');
+}
+
+gridMatrix[duckPosition.y][duckPosition.x] = reason;
+
 // Stop the countdown timer
     clearInterval(countdownLoop);
 // Stop the game loop
@@ -156,11 +178,12 @@ if (time === 0) {
 //Rendering
 function render() {
 placeDuck();
+checkPosition();
 drawGrid();
 }
 
 const renderLoop = setInterval(function () {
-    gridMatrix[duckPosition.y][duckPosition.x] = contentBeforeDuck;
+    updateDuckPosition();
     animateGame();
     render();
 }, 600);
